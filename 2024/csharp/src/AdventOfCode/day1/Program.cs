@@ -1,12 +1,15 @@
-using AdventOfCode.FileParsing;
-
 namespace AdventOfCode.Day1;
 
 public static class DayOne
 {
-    public static int PartOne()
+    public static int PartOne(List<List<int>> input)
     {
-        var (input1, input2) = GetSortedInput();
+        var input1 = input.First();
+        var input2 = input.Last();
+
+        input1.Sort((x, y) => x - y);
+        input2.Sort((x, y) => x - y);
+
         var distanceBetween = CalculateDifferencesBetweenListsOfInts(input1, input2);
 
         var sumOfDifferences = distanceBetween.Sum();
@@ -14,27 +17,19 @@ public static class DayOne
         return sumOfDifferences;
     }
 
-    public static int PartTwo()
+    public static int PartTwo(List<List<int>> input)
     {
-        var (input1, input2) = GetSortedInput();
+        var input1 = input.First();
+        var input2 = input.Last();
+
+        input1.Sort((x, y) => x - y);
+        input2.Sort((x, y) => x - y);
+
         var similarityScore = CalculateSimilarityScore(input1, input2);
 
         var sumOfDifferences = similarityScore.Sum();
 
         return sumOfDifferences;
-    }
-
-    private static (List<int> i1, List<int> i2) GetSortedInput()
-    {
-        var input = FileParser.ParseCSVColumns("day1/input.csv");
-
-        List<int> historianListOne = input.First();
-        List<int> historianListTwo = input.Last();
-
-        historianListOne.Sort((x, y) => x - y);
-        historianListTwo.Sort((x, y) => x - y);
-
-        return (historianListOne, historianListTwo);
     }
 
     private static List<int> CalculateDifferencesBetweenListsOfInts(List<int> l1, List<int> l2)
