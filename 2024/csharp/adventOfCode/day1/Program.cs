@@ -1,6 +1,6 @@
-using _2024.FileParsing;
+using AdventOfCode.FileParsing;
 
-namespace _2024.Day1;
+namespace AdventOfCode.Day1;
 
 public static class DayOne
 {

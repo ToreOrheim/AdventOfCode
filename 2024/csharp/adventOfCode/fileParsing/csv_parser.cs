@@ -1,4 +1,4 @@
-namespace _2024.FileParsing;
+namespace AdventOfCode.FileParsing;
 
 public static class FileParser
 {
@@ -18,5 +18,20 @@ public static class FileParser
         List<List<int>> columns = [columnOne, columnTwo];
 
         return columns;
+    }
+
+    public static List<List<int>> ParseCSVReport(string filePath)
+    {
+        var lines = File.ReadAllLines(filePath);
+
+        List<List<int>> data = [];
+        foreach (var line in lines)
+        {
+            var fields = line.Split(' ');
+            var parsed = fields.Select(int.Parse).ToList();
+            data.Add(parsed);
+        }
+
+        return data;
     }
 }
