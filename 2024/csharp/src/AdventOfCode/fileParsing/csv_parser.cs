@@ -1,3 +1,5 @@
+using System.Text.RegularExpressions;
+
 namespace AdventOfCode.FileParsing;
 
 public static class FileParser
@@ -33,5 +35,12 @@ public static class FileParser
         }
 
         return data;
+    }
+
+    public static List<string> ParseCorruptedMemory(string filePath)
+    {
+        var lines = File.ReadAllLines(filePath);
+
+        return lines.ToList();
     }
 }

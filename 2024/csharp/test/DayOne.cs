@@ -12,16 +12,18 @@ public class DayOne
     [Fact]
     public void PartOne()
     {
+        var expected = 11;
         var result = REAL.DayOne.PartOne(Input);
 
-        Assert.True(result == 11);
+        Assert.True(result == expected, $"Expected value of {expected}, but received {result}");
     }
 
     [Fact]
     public void PartTwo()
     {
+        var expected = 31;
         var result = REAL.DayOne.PartTwo(Input);
 
-        Assert.True(result == 31);
+        Assert.True(result == expected, $"Expected value of {expected}, but received {result}");
     }
 }

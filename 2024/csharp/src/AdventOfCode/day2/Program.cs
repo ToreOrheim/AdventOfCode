@@ -11,7 +11,7 @@ public static class DayTwo
 
     public static int PartTwo(List<List<int>> input)
     {
-        var safeReports = GetSafeReports(input);
+        var safeReports = GetSafeReports(input, true);
         return safeReports;
     }
 
@@ -63,6 +63,35 @@ public static class DayTwo
 
     private static bool CalculateIfReportIsSafeWithDampener(List<int> line)
     {
-        return line != null;
+        bool isSafe = true;
+        bool? previouslyIncreasing = null;
+        for (int i = 0; i < line.Count - 1; i++)
+        {
+            var num1 = line[i];
+            var num2 = line[i + 1];
+
+            var diff = num2 - num1;
+            var currentlyIncreasing = int.IsPositive(diff);
+
+            if (Math.Abs(diff) > 3 || Math.Abs(diff) == 0)
+            {
+                line.RemoveAt(i + 1);
+                return CalculateIfReportIsSafe(line);
+            }
+
+            if (previouslyIncreasing is null)
+            {
+                previouslyIncreasing = currentlyIncreasing;
+                continue;
+            }
+
+            if (previouslyIncreasing != currentlyIncreasing)
+            {
+                line.RemoveAt(i + 1);
+                return CalculateIfReportIsSafe(line);
+            }
+        }
+
+        return isSafe;
     }
 }

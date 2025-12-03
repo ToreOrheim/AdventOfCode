@@ -10,4 +10,6 @@ start:
 	dotnet run --project src/AdventOfCode/AdventOfCode.csproj
 check:
 	dotnet test
-
+run:
+	make build
+	make start
