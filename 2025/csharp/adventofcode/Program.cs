@@ -7,8 +7,9 @@ class Program
     static void Main(string[] args)
     {
         GetPassword();
-        GetSumOfAllInvalidIds();
+        //GetSumOfAllInvalidIds();
         GetTotalJoltageBattery();
+        GetAccessiblePaperRolls();
     }
 
     public static void GetPassword()
@@ -36,5 +37,12 @@ class Program
         var batteryBanks = FileHandler.ReadBatteryBanks("input/Day3Input.txt");
         var sum = BatteryBankAnalyzer.GetTotalJoltageRating(batteryBanks);
         Console.WriteLine($"Total output joltage: {sum}");
+    }
+
+    public static void GetAccessiblePaperRolls()
+    {
+        var paperRollMap = FileHandler.ReadPaperRollMap("input/Day4Input.txt");
+        var availablePaperRolls = PaperRollFinder.FindAccessiblePaperRoll(paperRollMap);
+        Console.WriteLine($"Available paper rolls: {availablePaperRolls}");
     }
 }

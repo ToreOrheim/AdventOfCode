@@ -41,4 +41,10 @@ public static class FileHandler
         var lines = File.ReadAllLines(filePath);
         return lines;
     }
+
+    public static Char[][] ReadPaperRollMap(string filePath)
+    {
+        string[] lines = File.ReadAllLines(filePath);
+        return [.. lines.Select(l => l.ToCharArray())];
+    }
 }
