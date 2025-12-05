@@ -16,4 +16,16 @@ public class KitchenInventoryTests
 
         Assert.Equal(expectedFreshIngredients, actualFreshIngredients);
     }
+
+    [Fact]
+    public void FreshIngredientIds()
+    {
+        long[][] freshIdRanges = [[3, 5], [10, 14], [16, 20], [12, 18]];
+
+        var expectedFreshIngredientIdCount = 14;
+
+        var actualFreshIngredientIdCount = KitchenInventoryManagement.CountFreshIngredientIds(freshIdRanges);
+
+        Assert.Equal(expectedFreshIngredientIdCount, actualFreshIngredientIdCount);
+    }
 }

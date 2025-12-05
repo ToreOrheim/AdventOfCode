@@ -51,6 +51,8 @@ class Program
     {
         var (freshIdRanges, ingredientIds) = FileHandler.ReadKitchenIngredientDatabase("input/Day5Input.txt");
         var countFreshIngredients = KitchenInventoryManagement.CountFreshIngredients(freshIdRanges, ingredientIds);
+        var countFreshIngredientIds = KitchenInventoryManagement.CountFreshIngredientIds(freshIdRanges);
         Console.WriteLine($"Fresh ingredients: {countFreshIngredients}");
+        Console.WriteLine($"Fresh ingredient IDs: {countFreshIngredientIds}");
     }
 }
