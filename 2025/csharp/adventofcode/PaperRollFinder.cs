@@ -54,7 +54,6 @@ public static class PaperRollFinder
                     }
                 }
                 var countAdjacentPaper = surroundingChars.FindAll(s => s is '@').Count;
-                Console.WriteLine($"{countAdjacentPaper < 4} {string.Join("", row)} - {countAdjacentPaper}");
 
                 if (countAdjacentPaper < 4)
                 {

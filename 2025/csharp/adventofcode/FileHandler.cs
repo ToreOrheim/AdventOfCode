@@ -47,4 +47,19 @@ public static class FileHandler
         string[] lines = File.ReadAllLines(filePath);
         return [.. lines.Select(l => l.ToCharArray())];
     }
+
+    public static (long[][] freshIdRanges, long[] ingredientIds) ReadKitchenIngredientDatabase(string filePath)
+    {
+        var lines = File.ReadAllLines(filePath);
+        string[][] idRanges = lines
+            .Where(i => i.Contains('-'))
+            .Select(i => i.Split("-").ToArray())
+            .ToArray();
+
+        string[] ingredientIds = idRanges.SelectMany(i => i).Except(lines).ToArray();
+
+        var parsedIdRanges = idRanges.Select(i => i.Select(j => long.Parse(j)).ToArray()).ToArray();
+        var parsedFreshIngredientIds = ingredientIds.Select(long.Parse).ToArray();
+        return (parsedIdRanges, parsedFreshIngredientIds);
+    }
 }
