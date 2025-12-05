@@ -51,15 +51,26 @@ public static class FileHandler
     public static (long[][] freshIdRanges, long[] ingredientIds) ReadKitchenIngredientDatabase(string filePath)
     {
         var lines = File.ReadAllLines(filePath);
-        string[][] idRanges = lines
-            .Where(i => i.Contains('-'))
-            .Select(i => i.Split("-").ToArray())
+
+        // Find the line that seperates freshIngredientRangeLines from ingredientIdLines
+        int emptyLine = Array.IndexOf(lines, "");
+
+        // Split lines on the seperator, first is freshIdRanges, second is ingredientIds
+        var freshIngredientIdRangeLines = lines[..emptyLine];
+        var ingredientIdLines = lines[(emptyLine + 1)..];
+
+        // Parse freshIdRanges
+        long[][] parsedFreshIngredientIdRanges = freshIngredientIdRangeLines
+            .Select(idRange => idRange.Split('-').Select(long.Parse).ToArray())
             .ToArray();
 
-        string[] ingredientIds = idRanges.SelectMany(i => i).Except(lines).ToArray();
+        // Parse individual ingredient IDs
+        long[] parsedIngredientIds = ingredientIdLines
+            // We crashed without checking ^_^
+            .Where(ingredientId => !string.IsNullOrWhiteSpace(ingredientId))
+            .Select(long.Parse)
+            .ToArray();
 
-        var parsedIdRanges = idRanges.Select(i => i.Select(j => long.Parse(j)).ToArray()).ToArray();
-        var parsedFreshIngredientIds = ingredientIds.Select(long.Parse).ToArray();
-        return (parsedIdRanges, parsedFreshIngredientIds);
+        return (parsedFreshIngredientIdRanges, parsedIngredientIds);
     }
 }

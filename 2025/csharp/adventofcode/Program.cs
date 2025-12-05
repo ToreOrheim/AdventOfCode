@@ -6,10 +6,10 @@ class Program
 {
     static void Main(string[] args)
     {
-        //GetPassword();
+        GetPassword();
         //GetSumOfAllInvalidIds();
-        //GetTotalJoltageBattery();
-        //GetAccessiblePaperRolls();
+        GetTotalJoltageBattery();
+        GetAccessiblePaperRolls();
         GetFreshIngredients();
     }
 
@@ -50,7 +50,6 @@ class Program
     public static void GetFreshIngredients()
     {
         var (freshIdRanges, ingredientIds) = FileHandler.ReadKitchenIngredientDatabase("input/Day5Input.txt");
-        Console.WriteLine("ReadFile");
         var countFreshIngredients = KitchenInventoryManagement.CountFreshIngredients(freshIdRanges, ingredientIds);
         Console.WriteLine($"Fresh ingredients: {countFreshIngredients}");
     }
