@@ -73,4 +73,31 @@ public static class FileHandler
 
         return (parsedFreshIngredientIdRanges, parsedIngredientIds);
     }
+
+    public static (char operation, long[] numbers)[] ReadTrashMathProblems(string filePath)
+    {
+        var lines = File.ReadAllLines(filePath);
+
+        // Find out how many lines
+        var lineCount = lines.Length;
+
+        // It works but... yikes
+        var numberLines = lines.SkipLast(2).Select(line => line.Split(null).Where(s => !string.IsNullOrWhiteSpace(s)).Select(long.Parse).ToArray()).ToArray();
+        var operations = lines.SkipLast(1).Last().Split(null).Where(s => !string.IsNullOrWhiteSpace(s)).Select(char.Parse).ToArray();
+
+        // Create an entry in the tuple list for every operation we have
+        List<(char operation, List<long> numbers)> problems =
+            operations.Select(op => (op, new List<long>())).ToList();
+
+        // Loop through our numbers and assign the columns to the correct tuple numbers array
+        for (int i = 0; i < numberLines.Length; i++)
+        {
+            for (int j = 0; j < numberLines[i].Length; j++)
+            {
+                problems[j].numbers.Add(numberLines[i][j]);
+            }
+        }
+
+        return problems.Select(problem => (problem.operation, problem.numbers.ToArray())).ToArray();
+    }
 }

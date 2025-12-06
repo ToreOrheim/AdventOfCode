@@ -11,6 +11,7 @@ class Program
         GetTotalJoltageBattery();
         GetAccessiblePaperRolls();
         GetFreshIngredients();
+        GetCephalopodMathHomeworkAnswer();
     }
 
     public static void GetPassword()
@@ -54,5 +55,12 @@ class Program
         var countFreshIngredientIds = KitchenInventoryManagement.CountFreshIngredientIds(freshIdRanges);
         Console.WriteLine($"Fresh ingredients: {countFreshIngredients}");
         Console.WriteLine($"Fresh ingredient IDs: {countFreshIngredientIds}");
+    }
+
+    public static void GetCephalopodMathHomeworkAnswer()
+    {
+        var problems = FileHandler.ReadTrashMathProblems("input/Day6Input.txt");
+        var answer = TrashMath.GetSolution(problems);
+        Console.WriteLine($"Math homework answer: {answer}");
     }
 }
